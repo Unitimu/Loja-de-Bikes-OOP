@@ -37,3 +37,5 @@ eu = Cliente()
 lojinha = LojadeBikes(15)
 
 eu.verificarBicicletas(lojinha)
+
+print('abobora')
