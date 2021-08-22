@@ -48,3 +48,5 @@ lojinha = LojadeBikes(15)
 
 eu.verificarBicicletas(lojinha)
 
+print('bananas')
+
