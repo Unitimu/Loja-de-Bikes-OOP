@@ -19,7 +19,8 @@ class Cliente(object):
             if stempo not in 'horasdiassemanas':
                 raise NameError
 
-            # if stempo in 'horas':
+            if stempo in 'horas':
+                print('amor')
 
 
 
