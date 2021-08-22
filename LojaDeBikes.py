@@ -20,7 +20,7 @@ class Cliente(object):
                 raise NameError
 
             if stempo in 'horas':
-                print('mudei aqui')
+                print('joquei')
 
 
 
