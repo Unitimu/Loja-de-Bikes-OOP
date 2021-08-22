@@ -21,6 +21,7 @@ class Cliente(object):
 
             if stempo in 'horas':
                 print('joquei, GUIGUI')
+                print('Pedro, GUILHERME ')
 
 
 
