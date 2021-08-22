@@ -16,16 +16,26 @@ class Cliente(object):
             ntempo, stempo = input(f'Por quanto tempo deseja alugar {bikes_a_alugar} bicletas? (Ex:"6 horas"/"3 dias"/"2 semanas")').split()
             ntempo = int(ntempo)
 
-            #if stempo not in 'horasdias'
+            if stempo not in 'horasdiassemanas':
+                raise NameError
+
+            # if stempo in 'horas':
+
 
 
         except SystemError:
             print(f'A loja desejada possui {loja.nbikes} bicletas, e você tentou alugar {bikes_a_alugar}')
             # self.alugarBikes()
 
+        except NameError:
+            print(f'O sistema não reconhece o termo "{stempo}", por favor insira o formato do tempo desejado como: "horas","dias" ou "semanas" ')
+
+
         except :
             print('Por favor, insira um dígito válido')
             # self.alugarBikes()
+
+        
 
 
 class LojadeBikes(object):
@@ -38,4 +48,3 @@ lojinha = LojadeBikes(15)
 
 eu.verificarBicicletas(lojinha)
 
-print('abobora')
