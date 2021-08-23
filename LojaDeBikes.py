@@ -20,8 +20,8 @@ class Cliente(object):
                 raise NameError
 
             if stempo in 'horas':
-                print('joquei, GUIGUI')
-                print('Pedro, GUILHERME ')
+                    print('joquei, GUIGUI')
+                    print('Pedro, GUILHERME ')
 
 
 
