@@ -173,6 +173,7 @@ class Loja(object):
 
 eu = Cliente()
 lojinha = Loja(15)
+print("amor")
 
 momentoAluguel, nBikes = eu.alugarBikes(lojinha)
 print(momentoAluguel)
