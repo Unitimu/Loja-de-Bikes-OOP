@@ -6,7 +6,7 @@ def verificarTempo():
         stempo = input('Qual forma de aluguel você deseja?("horas"/"dias"/"semanas")')
 
         if stempo not in ["horas", "dias", "semanas"]:
-            raise NameError
+            raise Exception
 
     except:
 
@@ -181,9 +181,10 @@ class Loja(object):
             pass
 
 
-eu = Cliente()
+eu = Cliente(5)
 lojinha = Loja(15)
-
+nome = input
+eu = Cliente()
 # eu.verificarBikes(lojinha)
 eu.alugarBikes(lojinha)
 
