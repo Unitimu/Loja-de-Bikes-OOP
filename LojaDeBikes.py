@@ -1,22 +1,23 @@
 import datetime
 
 
-def verificarTempo():
-    try:
-        stempo = input('Qual forma de aluguel você deseja?("horas"/"dias"/"semanas")')
-
-        if stempo not in ["horas", "dias", "semanas"]:
-            raise Exception
-
-    except:
-
-        print(
-            f'O sistema não reconhece o termo "{stempo}", por favor insira o formato do tempo desejado como: "horas","dias" ou "semanas" '
-        )
-        verificarTempo()
-
-
 class Cliente(object):
+    def verificarTempo(self):
+        try:
+            stempo = input(
+                'Qual forma de aluguel você deseja?("horas"/"dias"/"semanas")'
+            )
+
+            if stempo not in ["horas", "dias", "semanas"]:
+                raise Exception
+
+        except:
+
+            print(
+                f'O sistema não reconhece o termo "{stempo}", por favor insira o formato do tempo desejado como: "horas","dias" ou "semanas" '
+            )
+            self.verificarTempo()
+
     def verificarBikes(self, loja):
         print(loja.estoqueBikes)
 
@@ -173,8 +174,8 @@ class Loja(object):
 eu = Cliente()
 lojinha = Loja(15)
 
-lojinha.mostraEstoque()
-lojinha.valorTempoAluguelBikes(5, 10)
+momentoAluguel, nBikes = eu.alugarBikes(lojinha)
+print(momentoAluguel)
 
 
 # eu.verificarBikes(lojinha)
