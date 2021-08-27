@@ -131,18 +131,7 @@ class Loja(object):
     # SUPER FUNCAO KKK
 
     def valorTempoAluguelBikes(self, numeroBikes, tempoAluguel):
-        while numeroBikes > self.estoqueBikes:
-            print(
-                "\nPedido recebido - Total de bikes não disponível no momento || Total bikes disponíveis no estoque: {self.estoqueBikes}."
-            )
-            validaAluguel = input(
-                "Você ainda quer alugar alguma bike? Resp: Sim ou Não"
-            )
-            if validaAluguel.lower().strip() == "sim":
-                numeroBikes = int(input(f"\nQuantas bikes você quer alugar? "))
 
-            else:
-                break
         # se o user digitar algo diferente de sim, ele sai da funcao e já era, caso nao, ele coloca um numero valido e segue
         # caso já nao tenha colocado um numeroBikes valido antes
 
@@ -181,12 +170,15 @@ class Loja(object):
             pass
 
 
-eu = Cliente(5)
-lojinha = Loja(15)
-nome = input
 eu = Cliente()
+lojinha = Loja(15)
+
+lojinha.mostraEstoque()
+lojinha.valorTempoAluguelBikes(5, 10)
+
+
 # eu.verificarBikes(lojinha)
-eu.alugarBikes(lojinha)
+
 
 # Cada empréstimo segue apenas um modelo de cobrança (hora, dia ou semana);
 # O cliente pode decidir livremente quantas bicicletas quer alugar;
