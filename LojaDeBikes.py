@@ -183,8 +183,12 @@ class Loja(object):
 
 eu = Cliente(5)
 lojinha = Loja(15)
-nome = input
-eu = Cliente()
+print("amor")
+
+momentoAluguel, nBikes = eu.alugarBikes(lojinha)
+print(momentoAluguel)
+
+
 # eu.verificarBikes(lojinha)
 eu.alugarBikes(lojinha)
 
