@@ -1,25 +1,24 @@
 import datetime
 
 
-class Cliente(object):
-    def verificarTempo(self):
-        try:
-            stempo = input(
-                'Qual forma de aluguel você deseja?("horas"/"dias"/"semanas")'
-            )
 
+
+class Cliente(object):
+    def verificarBikes(self, loja):
+        print(loja.estoqueBikes)
+    
+    def verificarTempo(self,stempo):
+        try:
+            #stempo = input('Qual forma de aluguel você deseja?("horas"/"dias"/"semanas")')
             if stempo not in ["horas", "dias", "semanas"]:
                 raise Exception
 
         except:
-
             print(
                 f'O sistema não reconhece o termo "{stempo}", por favor insira o formato do tempo desejado como: "horas","dias" ou "semanas" '
             )
             self.verificarTempo()
-
-    def verificarBikes(self, loja):
-        print(loja.estoqueBikes)
+        return -1
 
     def alugarBikes(self, loja):
 
@@ -38,7 +37,7 @@ class Cliente(object):
                 f"Os preços da loja são de :\nPreço/hora:R${loja.precoHora},\nPreço/dia:R${loja.precoDia},\nPreço/semanaR$:{loja.precoSemana}"
             )
 
-            verificarTempo()
+            self.verificarTempo()
             agora = datetime.datetime.now()
 
             return agora, bikes_a_alugar
@@ -132,7 +131,18 @@ class Loja(object):
     # SUPER FUNCAO KKK
 
     def valorTempoAluguelBikes(self, numeroBikes, tempoAluguel):
+        while numeroBikes > self.estoqueBikes:
+            print(
+                "\nPedido recebido - Total de bikes não disponível no momento || Total bikes disponíveis no estoque: {self.estoqueBikes}."
+            )
+            validaAluguel = input(
+                "Você ainda quer alugar alguma bike? Resp: Sim ou Não"
+            )
+            if validaAluguel.lower().strip() == "sim":
+                numeroBikes = int(input(f"\nQuantas bikes você quer alugar? "))
 
+            else:
+                break
         # se o user digitar algo diferente de sim, ele sai da funcao e já era, caso nao, ele coloca um numero valido e segue
         # caso já nao tenha colocado um numeroBikes valido antes
 
@@ -171,15 +181,12 @@ class Loja(object):
             pass
 
 
-eu = Cliente()
+eu = Cliente(5)
 lojinha = Loja(15)
-
-momentoAluguel, nBikes = eu.alugarBikes(lojinha)
-print(momentoAluguel)
-
-
+nome = input
+eu = Cliente()
 # eu.verificarBikes(lojinha)
-
+eu.alugarBikes(lojinha)
 
 # Cada empréstimo segue apenas um modelo de cobrança (hora, dia ou semana);
 # O cliente pode decidir livremente quantas bicicletas quer alugar;
