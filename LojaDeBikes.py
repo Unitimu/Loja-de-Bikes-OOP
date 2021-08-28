@@ -5,9 +5,11 @@ class Cliente(object):
     def verificarBikes(self, loja):
         print(loja.estoqueBikes)
 
-    def verificarTempo(self, stempo):
+    def verificarTempo(self):
         try:
-            # stempo = input('Qual forma de aluguel você deseja?("horas"/"dias"/"semanas")')
+            stempo = input(
+                'Qual forma de aluguel você deseja?("horas"/"dias"/"semanas")'
+            )
             if stempo not in ["horas", "dias", "semanas"]:
                 raise Exception
 
@@ -188,7 +190,7 @@ print(momentoAluguel)
 
 
 # eu.verificarBikes(lojinha)
-eu.alugarBikes(lojinha)
+# eu.alugarBikes(lojinha)
 
 # Cada empréstimo segue apenas um modelo de cobrança (hora, dia ou semana);
 # O cliente pode decidir livremente quantas bicicletas quer alugar;
