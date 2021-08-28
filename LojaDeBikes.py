@@ -8,18 +8,19 @@ class Cliente(object):
         try:
             if stempo not in ["horas", "dias", "semanas"]:
                 raise Exception
+            else:
+                print(f"O tempo escolhido foi em {stempo}.")
 
         except:
             print(
                 f'O sistema não reconhece o termo "{stempo}", por favor insira o formato do tempo desejado como: "horas","dias" ou "semanas" '
             )
+        
         return -1
 
-    def alugarBikes(self, loja):
+    def alugarBikes(self,loja, bikes_a_alugar,stempo):
 
         try:
-            bikes_a_alugar = int(input("Quantas bicicletas você deseja alugar? "))
-
             if bikes_a_alugar == 0:
                 raise ValueError
             if bikes_a_alugar > loja.estoqueBikes:
@@ -32,7 +33,7 @@ class Cliente(object):
                 f"Os preços da loja são de :\nPreço/hora:R${loja.precoHora},\nPreço/dia:R${loja.precoDia},\nPreço/semanaR$:{loja.precoSemana}"
             )
 
-            self.verificarTempo()
+            self.verificarTempo(stempo)
             agora = datetime.datetime.now()
 
             return agora, bikes_a_alugar
@@ -175,12 +176,11 @@ class Loja(object):
         except:
             pass
 
-
-#eu = Cliente()
-#lojinha = Loja(15)
+eu = Cliente()
+lojinha = Loja(15)
 #print("amor")
 
-#momentoAluguel, nBikes = eu.alugarBikes(lojinha)
+momentoAluguel, nBikes = eu.alugarBikes(lojinha, 5, "horas")
 #print(momentoAluguel)
 
 
