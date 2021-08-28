@@ -34,7 +34,13 @@ class Cliente(object):
             formatoTempo = stempo
             loja.estoqueBikes -= bikes_a_alugar
 
-            return formatoTempo, bikes_a_alugar
+            if 5 >= bikes_a_alugar >= 3:
+                familia = True
+                print(
+                    f"Como você fez um aluguel de {bikes_a_alugar} bicicletas, você acabou de ganhar um desconto de 30% por conta do Pacote Família!"
+                )
+
+            return formatoTempo, bikes_a_alugar, familia
 
         except SystemError:
             print(
@@ -68,30 +74,43 @@ class Loja(object):
         else:
             print(f"\nEstoque de Bicicletas - Vazio no momento.")
 
-    def valorTempoAluguelBikes(self, numeroBikes, stempo, tempoUsado):
+    def valorTempoAluguelBikes(
+        self, numeroBikes, stempo, tempoUsado, promoFamilia=False
+    ):
         """Verifica o tempo que o cliente usufruiu das bikes e realiza a cobrança,
         tendo como parâmetros: Numero de Bikes(int), formato de cobrança(str) e o Tempo gasto(timedelta)
         """
 
+        descontoFamilia = 1
+
         try:
+
+            if promoFamilia:
+                descontoFamilia = 0.7
 
             if stempo == "horas":
                 tempoAdequado = math.ceil(tempoUsado.total_seconds() / 3600)
-                valorConta = numeroBikes * (tempoAdequado * self.precoHora)
+                valorConta = (
+                    numeroBikes * (tempoAdequado * self.precoHora) * descontoFamilia
+                )
                 print(
-                    f"Pedido recebido - {numeroBikes} bicicletas durante {tempoAdequado} horas, total de R$ {valorConta} reais, pedido confirmado \nTotal bikes disponíveis no estoque: {self.estoqueBikes}."
+                    f"Pedido recebido: {numeroBikes} bicicletas durante {tempoAdequado} horas. \nTotal de R${valorConta:.2f}\nTotal bikes disponíveis no estoque: {self.estoqueBikes}."
                 )
             if stempo == "dias":
                 tempoAdequado = math.ceil(tempoUsado.total_seconds() / 3600 * 24)
-                valorConta = numeroBikes * (tempoAdequado * self.precoDia)
+                valorConta = (
+                    numeroBikes * (tempoAdequado * self.precoDia) * descontoFamilia
+                )
                 print(
-                    f"Pedido recebido - {numeroBikes} bicicletas durante {tempoAdequado} horas, total de R$ {valorConta} reais, pedido confirmado \nTotal bikes disponíveis no estoque: {self.estoqueBikes}."
+                    f"Pedido recebido: {numeroBikes} bicicletas durante {tempoAdequado} horas. \nTotal de: R${valorConta:.2f}\nTotal bikes disponíveis no estoque: {self.estoqueBikes}."
                 )
             if stempo == "semanas":
                 tempoAdequado = math.ceil(tempoUsado.total_seconds() / 3600 * 24 * 7)
-                valorConta = numeroBikes * (tempoAdequado * self.precoSemana)
+                valorConta = (
+                    numeroBikes * (tempoAdequado * self.precoSemana) * descontoFamilia
+                )
                 print(
-                    f"Pedido recebido - {numeroBikes} bicicletas durante {tempoAdequado} horas, total de R$ {valorConta} reais, pedido confirmado \nTotal bikes disponíveis no estoque: {self.estoqueBikes}."
+                    f"Pedido recebido: {numeroBikes} bicicletas durante {tempoAdequado} horas. \nTotal de R${valorConta:.2f}\nTotal bikes disponíveis no estoque: {self.estoqueBikes}."
                 )
 
         except:
@@ -101,8 +120,8 @@ class Loja(object):
 eu = Cliente()
 lojinha = Loja(15)
 
-stempo, nBikes = eu.alugarBikes(lojinha, 5, "horas")
+stempo, nBikes, promoFamilia = eu.alugarBikes(lojinha, 5, "horas")
 
 
 n = timedelta(days=5, hours=3, weeks=2)
-lojinha.valorTempoAluguelBikes(nBikes, stempo, n)
+lojinha.valorTempoAluguelBikes(nBikes, stempo, n, promoFamilia)
