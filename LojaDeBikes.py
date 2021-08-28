@@ -2,11 +2,9 @@ from datetime import datetime, timedelta
 import math
 
 
-class Cliente(object):
-    def verificarBikes(self, loja):
-        print(loja.estoqueBikes)
+class Cliente(object): 
 
-    def verificarTempo(self, nBikes, stempo):
+    def verificarTempo(self, nBikes, stempo): #testado
         try:
             if stempo not in ["horas", "dias", "semanas"]:
                 raise Exception
@@ -20,7 +18,7 @@ class Cliente(object):
             )
             return 0
 
-    def alugarBikes(self, loja, bikes_a_alugar, stempo):
+    def alugarBikes(self, loja, bikes_a_alugar, stempo): #testado
         familia = False
 
         try:
@@ -69,17 +67,26 @@ class Loja(object):
         self.precoDia = 180
         self.precoSemana = 900
 
-    def mostraEstoque(self):
+    def mostraEstoque(self): #testado
         """fazer um print do estoque de bikes"""
+        try:
+            if not isinstance(self.estoqueBikes, int):
+                raise ValueError
 
-        if self.estoqueBikes > 1:
-            print(f"\nEstoque de Bicicletas - {self.estoqueBikes} bikes.")
+            if self.estoqueBikes > 1:
+                print(f"\nEstoque de Bicicletas - {self.estoqueBikes} bikes.")
 
-        elif self.estoqueBikes == 1:
-            print(f"\nEstoque de Bicicletas - {self.estoqueBikes} bike.")
+            elif self.estoqueBikes == 1:
+                print(f"\nEstoque de Bicicletas - {self.estoqueBikes} bike.")
 
-        else:
-            print(f"\nEstoque de Bicicletas - Vazio no momento.")
+            else:
+                print(f"\nEstoque de Bicicletas - Vazio no momento.")
+            
+            return -1
+        except ValueError:
+            print("Você imputou um valor não coerente, ajustar")
+            return 0
+
 
     def valorTempoAluguelBikes(
         self, numeroBikes, stempo, tempoUsado, promoFamilia=False
@@ -91,11 +98,17 @@ class Loja(object):
         descontoFamilia = 1
 
         try:
-
+            if not isinstance(promoFamilia,bool):
+                raise TypeError
+            
             if promoFamilia:
                 descontoFamilia = 0.7
 
+
             tempoHoras = tempoUsado.total_seconds() / 3600
+
+            if stempo not in ["horas", "dias","semanas"]:
+                raise AttributeError
 
             if stempo == "horas":
 
@@ -133,16 +146,23 @@ class Loja(object):
                 print(
                     f"Preço Semana: R${self.precoSemana * descontoFamilia:.2f}\nTotal: R${valorConta:.2f}"
                 )
+            return -1
+
+        except TypeError:
+            print("Argumento promofamilia não booleano, corrigir ")
+            return -2
+
+        except AttributeError:
+            print('Você não inseriu dias/semanas/horas, corrigir')
+            return -3
 
         except:
             print("Erro 404")
-
+            return 0
+        
 
 # eu = Cliente()
 # lojinha = Loja(15)
-
 # promoFamilia, nBikes, stempo  = eu.alugarBikes(lojinha, 5, "dias")
-
-
 # tempoAluguel = timedelta(days=5, hours=3, weeks=2)
 # lojinha.valorTempoAluguelBikes(nBikes, stempo, tempoAluguel, promoFamilia)
