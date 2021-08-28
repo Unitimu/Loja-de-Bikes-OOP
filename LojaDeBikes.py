@@ -1,5 +1,6 @@
 import datetime
 
+
 class Cliente(object):
     def verificarBikes(self, loja):
         print(loja.estoqueBikes)
@@ -8,17 +9,17 @@ class Cliente(object):
         try:
             if stempo not in ["horas", "dias", "semanas"]:
                 raise Exception
-            else:
-                print(f"O tempo escolhido foi em {stempo}.")
+
+            print(f"O tempo escolhido foi em {stempo}.")
 
         except:
             print(
                 f'O sistema não reconhece o termo "{stempo}", por favor insira o formato do tempo desejado como: "horas","dias" ou "semanas" '
             )
-        
+
         return -1
 
-    def alugarBikes(self,loja, bikes_a_alugar,stempo):
+    def alugarBikes(self, loja, bikes_a_alugar, stempo):
 
         try:
             if bikes_a_alugar == 0:
@@ -176,12 +177,13 @@ class Loja(object):
         except:
             pass
 
+
 eu = Cliente()
 lojinha = Loja(15)
-#print("amor")
+# print("amor")
 
 momentoAluguel, nBikes = eu.alugarBikes(lojinha, 5, "horas")
-#print(momentoAluguel)
+# print(momentoAluguel)
 
 
 # eu.verificarBikes(lojinha)
