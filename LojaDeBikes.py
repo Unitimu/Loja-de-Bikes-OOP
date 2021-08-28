@@ -12,18 +12,21 @@ class Cliente(object):
                 raise Exception
 
             print(f"O aluguel de {nBikes} bicicletas será cobrado em {stempo}.")
+            return -1
 
         except:
             print(
                 f'O sistema não reconhece o termo "{stempo}", por favor insira um formato de tempo desejado, como: "horas","dias" ou "semanas" '
             )
-
-        return -1
+            return 0
 
     def alugarBikes(self, loja, bikes_a_alugar, stempo):
+        familia = False
 
         try:
             if bikes_a_alugar == 0:
+                raise ValueError
+            if type(bikes_a_alugar) != int:
                 raise ValueError
             if bikes_a_alugar > loja.estoqueBikes:
                 raise SystemError(
@@ -40,17 +43,21 @@ class Cliente(object):
                     f"Como você fez um aluguel de {bikes_a_alugar} bicicletas, você acabou de ganhar um desconto de 30% por conta do Pacote Família!"
                 )
 
-            return formatoTempo, bikes_a_alugar, familia
+            return (
+                familia,
+                bikes_a_alugar,
+                formatoTempo,
+            )
 
         except SystemError:
             print(
                 f"A loja desejada possui {loja.estoqueBikes} bicletas no momento, não suportando um aluguel de {bikes_a_alugar}"
             )
-            self.alugarBikes(loja)
+            return -1
 
         except ValueError:
             print("Por favor, insira um dígito válido")
-            self.alugarBikes(loja)
+            return 0
 
 
 # Aluguel para família, uma promoção que pode incluir de 3 a 5 empréstimos (de qualquer tipo) com 30% de desconto no valor total.
@@ -131,11 +138,11 @@ class Loja(object):
             print("Erro 404")
 
 
-eu = Cliente()
-lojinha = Loja(15)
+# eu = Cliente()
+# lojinha = Loja(15)
 
-stempo, nBikes, promoFamilia = eu.alugarBikes(lojinha, 5, "semanas")
+# promoFamilia, nBikes, stempo  = eu.alugarBikes(lojinha, 5, "dias")
 
 
-tempoAluguel = timedelta(days=5, hours=3, weeks=2)
-lojinha.valorTempoAluguelBikes(nBikes, stempo, tempoAluguel, promoFamilia)
+# tempoAluguel = timedelta(days=5, hours=3, weeks=2)
+# lojinha.valorTempoAluguelBikes(nBikes, stempo, tempoAluguel, promoFamilia)
