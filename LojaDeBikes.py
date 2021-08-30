@@ -2,9 +2,8 @@ from datetime import datetime, timedelta
 import math
 
 
-class Cliente(object): 
-
-    def verificarTempo(self, nBikes, stempo): #testado
+class Cliente(object):
+    def verificarTempo(self, nBikes, stempo):  # testado
         try:
             if stempo not in ["horas", "dias", "semanas"]:
                 raise Exception
@@ -18,7 +17,7 @@ class Cliente(object):
             )
             return 0
 
-    def alugarBikes(self, loja, bikes_a_alugar, stempo): #testado
+    def alugarBikes(self, loja, bikes_a_alugar, stempo):  # testado
         familia = False
 
         try:
@@ -67,7 +66,7 @@ class Loja(object):
         self.precoDia = 180
         self.precoSemana = 900
 
-    def mostraEstoque(self): #testado
+    def mostraEstoque(self):  # testado
         """fazer um print do estoque de bikes"""
         try:
             if not isinstance(self.estoqueBikes, int):
@@ -81,12 +80,11 @@ class Loja(object):
 
             else:
                 print(f"\nEstoque de Bicicletas - Vazio no momento.")
-            
+
             return -1
         except ValueError:
             print("Você imputou um valor não coerente, ajustar")
             return 0
-
 
     def valorTempoAluguelBikes(
         self, numeroBikes, stempo, tempoUsado, promoFamilia=False
@@ -98,16 +96,15 @@ class Loja(object):
         descontoFamilia = 1
 
         try:
-            if not isinstance(promoFamilia,bool):
+            if not isinstance(promoFamilia, bool):
                 raise TypeError
-            
+
             if promoFamilia:
                 descontoFamilia = 0.7
 
-
             tempoHoras = tempoUsado.total_seconds() / 3600
 
-            if stempo not in ["horas", "dias","semanas"]:
+            if stempo not in ["horas", "dias", "semanas"]:
                 raise AttributeError
 
             if stempo == "horas":
@@ -153,16 +150,16 @@ class Loja(object):
             return -2
 
         except AttributeError:
-            print('Você não inseriu dias/semanas/horas, corrigir')
+            print("Você não inseriu dias/semanas/horas, corrigir")
             return -3
 
         except:
             print("Erro 404")
             return 0
-        
 
-# eu = Cliente()
-# lojinha = Loja(15)
-# promoFamilia, nBikes, stempo  = eu.alugarBikes(lojinha, 5, "dias")
-# tempoAluguel = timedelta(days=5, hours=3, weeks=2)
-# lojinha.valorTempoAluguelBikes(nBikes, stempo, tempoAluguel, promoFamilia)
+
+eu = Cliente()
+lojinha = Loja(15)
+promoFamilia, nBikes, stempo = eu.alugarBikes(lojinha, 5, "dias")
+tempoAluguel = timedelta(days=5, hours=3, weeks=2)
+lojinha.valorTempoAluguelBikes(nBikes, stempo, tempoAluguel, promoFamilia)
