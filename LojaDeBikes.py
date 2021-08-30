@@ -143,6 +143,7 @@ class Loja(object):
                 print(
                     f"Preço Semana: R${self.precoSemana * descontoFamilia:.2f}\nTotal: R${valorConta:.2f}"
                 )
+            self.estoqueBikes += numeroBikes
             return -1
 
         except TypeError:
